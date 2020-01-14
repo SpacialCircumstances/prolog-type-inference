@@ -11,4 +11,5 @@ type(let(X, VE, BE), T, ENV, _) :- type(VE, VT, ENV, _), env_add(ENV, NE1, X, VT
 :- begin_tests(typing).
 test(const_type) :- type(const(2), int, _, _).
 test(simple_var) :- list_to_assoc([ x - int ], E), type(var(x), int, E, _).
+test(id_function) :- once(type(lambda(x, var(x)), [func, T1, T2], _, _)), =(T1, T2).
 :- end_tests(typing).
