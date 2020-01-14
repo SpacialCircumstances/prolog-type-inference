@@ -12,4 +12,6 @@ type(let(X, VE, BE), T, ENV) :- type(VE, VT, ENV), env_add(ENV, NEW_ENV, X, VT),
 test(const_type) :- type(const(2), int, _).
 test(simple_var) :- list_to_assoc([ x - int ], E), type(var(x), int, E).
 test(id_function) :- once(type(lambda(x, var(x)), [func, T1, T2], _)), =(T1, T2).
+test(let_with_id) :- once(type(let(id, lambda(x, var(x)), app(var(id), const(1))), int, _)).
+test(variable_shadowing) :- once(type(lambda(x, lambda(x, var(x))), T, _), =(T, [func, _, [func, A, A]])).
 :- end_tests(typing).
