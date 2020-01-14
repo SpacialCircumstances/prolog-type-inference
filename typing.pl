@@ -6,7 +6,7 @@ type(const(_), int, _).
 type(var(X), T, ENV) :- env_contains(ENV, X, T).
 type(app(F, A), T, ENV) :- type(F, [func, X, T], ENV), type(A, X, ENV).
 type(lambda(X, E), T, ENV) :- env_add(ENV, NEW_ENV, X, ARGTYPE), type(E, BODYTYPE, NEW_ENV), =(T, [func, ARGTYPE, BODYTYPE]).
-type(let(X, VE, BE), T, ENV) :- type(VE, VT, ENV), env_add(ENV, NEW_ENV, X, VT), type(BE, T, NEW_ENV).
+type(let(X, VE, BE), T, ENV) :- env_add(ENV, NEW_ENV, X, VT), type(VE, VT, ENV), type(BE, T, NEW_ENV).
 
 :- begin_tests(typing).
 test(const_type) :- type(const(2), int, _).
