@@ -1,4 +1,4 @@
-library(assoc).
+use_module(library(assoc)).
 env_add(OLDENV, NEWENV, X, T) :- put_assoc(X, OLDENV, T, NEWENV).
 env_contains(ENV, X, T) :- get_assoc(X, ENV, T).
 type(const(_), int, _, _).
