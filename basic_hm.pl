@@ -23,4 +23,9 @@ test(let_with_id) :- once(type(let(id, lambda(x, var(x)), app(var(id), int_const
 test(variable_shadowing) :- once(type(lambda(x, lambda(x, var(x))), T, _)), =(T, [func, _, [func, A, A]]).
 test(simple_application) :- once(type(app(lambda(x, var(x)), bool_const(true)), bool, _)).
 test(basic_if) :- once(type(if(bool_const(true), int_const(1), int_const(2)), int, _)).
+test(factorial) :- list_to_assoc([eq - [func, A, [func, A, bool]], minus - [func, int, [func, int, int]], mul - [func, int, [func, int, int]]], E),
+                    once(type(let_rec(fac,
+                        lambda(n, if(app(app(var(eq), var(n)), int_const(1)),
+                            int_const(1),
+                            app(var(fac), app(app(var(mul), var(n)), app(app(var(minus), var(n)), int_const(1)))))), app(var(fac), int_const(2))), int, E)).
 :- end_tests(typing).
