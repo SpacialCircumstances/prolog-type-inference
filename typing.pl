@@ -1,3 +1,7 @@
+%A typechecker for a STLC-based language
+%Based on HM, but without let-generalization.
+%Expressions are defined as Prolog-predicates.
+
 use_module(library(assoc)).
 use_module(library(plunit)).
 env_add(OLDENV, NEWENV, X, T) :- put_assoc(X, OLDENV, T, NEWENV).
