@@ -12,6 +12,7 @@ type(var(X), T, ENV) :- env_contains(ENV, X, T).
 type(app(F, A), T, ENV) :- type(F, [func, X, T], ENV), type(A, X, ENV).
 type(lambda(X, E), T, ENV) :- env_add(ENV, NEW_ENV, X, ARGTYPE), type(E, BODYTYPE, NEW_ENV), =(T, [func, ARGTYPE, BODYTYPE]).
 type(let(X, VE, BE), T, ENV) :- env_add(ENV, NEW_ENV, X, VT), type(VE, VT, ENV), type(BE, T, NEW_ENV).
+type(let_rec(X, VE, BE), T, ENV) :- env_add(ENV, NEW_ENV, X, VT), type(VE, VT, NEW_ENV), type(BE, T, NEW_ENV).
 type(if(COND, IF, ELSE), T, ENV) :- type(COND, bool, ENV), type(IF, T, ENV), type(ELSE, T, ENV).
 
 :- begin_tests(typing).
